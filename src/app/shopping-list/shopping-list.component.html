@@ -1,14 +1,25 @@
-<div class="">
+<div class="mt-4">
   <div class="space-y-3">
-    <app-shopping-edit></app-shopping-edit>
+    <app-shopping-edit
+      (ingredientAdded)="onAddIngredient($event)"
+    ></app-shopping-edit>
     <hr />
-    <ul class="flex flex-col bg-rose-100 p-1 space-y-2 w-full">
+    <ul class="flex flex-col bg-sky-50 p-1 space-y-2 w-full">
       <a
         href="#"
         class="border border-gray-100 p-2 bg-zinc-50 rounded-md shadow-md w0full"
-        *ngFor="let item of ingredient"
-        >{{ item?.name }} ({{ item?.amount }})</a
+        *ngFor="let item of ingredient; let i = index"
       >
+        <div class="flex justify-between items-center">
+          <div class="flex space-x-2">
+            <p>{{ item?.name }}</p>
+            <p>({{ item?.amount }})</p>
+          </div>
+          <button class="btn btn-sm btn-error" (click)="delteItem(i)">
+            Delete
+          </button>
+        </div>
+      </a>
     </ul>
   </div>
 </div>
