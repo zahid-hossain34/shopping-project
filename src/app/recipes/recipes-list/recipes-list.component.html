@@ -6,24 +6,10 @@
 <hr />
 <div class="">
   <div class="mt-2">
-    <a
-      href="#"
-      class="flex justify-between border border-1 border-gray-300 p-2 rounded-md"
+    <app-recipe-item
       *ngFor="let recipeItem of recipes"
-    >
-      <div class="">
-        <h4 class="">{{ recipeItem?.name }}</h4>
-        <p class="">{{ recipeItem?.description }}</p>
-      </div>
-      <span class="">
-        <img
-          src="{{ recipeItem?.imagePath }}"
-          alt="{{ recipeItem?.name }}"
-          class="img-responsive"
-          style="max-height: 50px"
-        />
-      </span>
-    </a>
-    <app-recipe-item></app-recipe-item>
+      [recipe]="recipeItem"
+      (recipeSelected)="onSelectRecipe(recipeItem)"
+    ></app-recipe-item>
   </div>
 </div>

@@ -1,1 +1,18 @@
-<p>recipe-item works!</p>
+<a
+  href="#"
+  class="flex justify-between border border-1 border-gray-300 p-2 rounded-md mb-2"
+  (click)="onSelect()"
+>
+  <div class="">
+    <h4 class="">{{ recipe.name }}</h4>
+    <p class="">{{ recipe.description }}</p>
+  </div>
+  <span class="">
+    <img
+      src="{{ recipe.imagePath }}"
+      alt="{{ recipe.name }}"
+      class="rounded-md"
+      style="max-height: 50px"
+    />
+  </span>
+</a>

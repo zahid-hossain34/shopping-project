@@ -1,8 +1,20 @@
-<div class="grid grid-cols-2 gap-8 mt-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 mt-4">
   <div class="">
-    <app-recipes-list></app-recipes-list>
+    <app-recipes-list
+      (recipeWasSelected)="onSelectRecipe($event)"
+    ></app-recipes-list>
   </div>
   <div class="">
-    <app-recipes-details></app-recipes-details>
+    <app-recipes-details
+      *ngIf="selectedRecipeDetails; else noRecipeSelected"
+      [recipeDetails]="selectedRecipeDetails"
+    ></app-recipes-details>
+    <ng-template #noRecipeSelected>
+      <div
+        class="alert mt-[70px] w-[300px] ml-[100px] bg-orange-200 flex justify-center items-center"
+      >
+        <span>Please Select a recipe !</span>
+      </div>
+    </ng-template>
   </div>
 </div>

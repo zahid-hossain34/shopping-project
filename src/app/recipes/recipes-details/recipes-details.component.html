@@ -1,34 +1,13 @@
-<div class="row">
-  <div class="col-xs-12">
-    <img src="" alt="" class="align-items-lg-center" />
+<div class="bg-zinc-50">
+  <div class="w-full h-[300px]">
+    <img
+      class="w-full h-full rounded-md object-cover"
+      [src]="recipeDetails.imagePath"
+      alt="{{ recipeDetails.name }}"
+    />
   </div>
-</div>
-<div class="row">
-  <div class="col-sx-12">
-    <h1>Recipe Name</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary dropdown-toggle">
-        Manage Recipe <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li><a href="">To Shopping List</a></li>
-        <li><a href="">Edite Recipe</a></li>
-        <li><a href="">Delete Recipe</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sx-12">
-    <p>Description</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sx-12">
-    <p>Ingredients</p>
+  <div>
+    <h1 class="text-2xl font-mono font-semibold">{{ recipeDetails.name }}</h1>
+    <p class="text-lg text-gray-700 italic">{{ recipeDetails.description }}</p>
   </div>
 </div>
