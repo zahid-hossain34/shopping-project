@@ -1,21 +1,21 @@
-<div class="row">
-  <div class="col-xs-12">
+<div class="mb-2">
+  <div class="">
     <button class="btn btn-success">New Recipe</button>
   </div>
 </div>
 <hr />
-<div class="row">
-  <div class="col-xs-12 mt-2">
+<div class="">
+  <div class="mt-2">
     <a
       href="#"
-      class="list-group-item clearfix border border-1 border-gray-300 p-2 rounded-2"
+      class="flex justify-between border border-1 border-gray-300 p-2 rounded-md"
       *ngFor="let recipeItem of recipes"
     >
-      <div class="float-start">
-        <h4 class="list-group-item-heading">{{ recipeItem?.name }}</h4>
-        <p class="list-group-item-text">{{ recipeItem?.description }}</p>
+      <div class="">
+        <h4 class="">{{ recipeItem?.name }}</h4>
+        <p class="">{{ recipeItem?.description }}</p>
       </div>
-      <span class="float-end">
+      <span class="">
         <img
           src="{{ recipeItem?.imagePath }}"
           alt="{{ recipeItem?.name }}"
