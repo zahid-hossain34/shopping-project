@@ -1,7 +1,9 @@
 <a
+  *ngFor="let recipe of recipes; let i = index"
   href="#"
-  class="flex justify-between border border-1 border-gray-300 p-2 rounded-md mb-2"
-  (click)="onSelect(recipe)"
+  class="flex justify-between border border-1 border-gray-200 shadow-sm p-2 rounded-md mb-2"
+  [ngStyle]="{ 'background-color': recipe.isSelected ? '#ccfbf1' : '' }"
+  (click)="onSelect(recipe, i)"
 >
   <div class="">
     <h4 class="">{{ recipe.name }}</h4>

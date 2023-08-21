@@ -1,4 +1,4 @@
-<div class="bg-zinc-50">
+<div class="bg-zinc-50 space-y-5 mb-4">
   <div class="w-full h-[300px]">
     <img
       class="w-full h-full rounded-md object-cover"
@@ -6,8 +6,52 @@
       alt="{{ recipeDetails.name }}"
     />
   </div>
+
   <div>
     <h1 class="text-2xl font-mono font-semibold">{{ recipeDetails.name }}</h1>
     <p class="text-lg text-gray-700 italic">{{ recipeDetails.description }}</p>
   </div>
+  <div>
+    <div class="dropdown">
+      <label tabindex="0" class="btn m-1 border border-teal-300"
+        >Mange Recipe</label
+      >
+      <ul
+        tabindex="0"
+        class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+      >
+        <li><a (click)="onAddShoppingList()">To Shopping List</a></li>
+        <li><a>Edite item</a></li>
+        <li><a>Delte item</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="">
+    <ul
+      *ngIf="recipeDetails.ingredients; else noData"
+      class="flex flex-col bg-sky-50 p-1 space-y-2 w-full"
+    >
+      <a
+        href="#"
+        class="border border-gray-100 p-2 bg-zinc-50 rounded-md shadow-md w0full"
+        *ngFor="let item of recipeDetails.ingredients"
+      >
+        <div class="flex justify-between items-center">
+          <div class="flex space-x-2">
+            <p>{{ item?.name }}</p>
+            <p>({{ item?.amount }})</p>
+          </div>
+        </div>
+      </a>
+    </ul>
+  </div>
 </div>
+
+<ng-template #noData>
+  <div
+    class="flex justify-center items-center bg-orange-200 p-2 rounded-md shadow-md w-full"
+  >
+    <p class="text-gray-50">No data found</p>
+  </div>
+</ng-template>

@@ -1,10 +1,11 @@
 <div class="mt-4">
   <div class="space-y-3">
-    <app-shopping-edit
-      (ingredientAdded)="onAddIngredient($event)"
-    ></app-shopping-edit>
+    <app-shopping-edit></app-shopping-edit>
     <hr />
-    <ul class="flex flex-col bg-sky-50 p-1 space-y-2 w-full">
+    <ul
+      *ngIf="ingredient.length > 0; else noData"
+      class="flex flex-col bg-sky-50 p-1 space-y-2 w-full"
+    >
       <a
         href="#"
         class="border border-gray-100 p-2 bg-zinc-50 rounded-md shadow-md w0full"
@@ -15,11 +16,18 @@
             <p>{{ item?.name }}</p>
             <p>({{ item?.amount }})</p>
           </div>
-          <button class="btn btn-sm btn-error" (click)="delteItem(i)">
+          <button class="btn btn-sm btn-error" (click)="delteItem(item)">
             Delete
           </button>
         </div>
       </a>
     </ul>
+    <ng-template #noData>
+      <div
+        class="flex justify-center items-center bg-orange-200 p-2 rounded-md shadow-md w-full"
+      >
+        <p class="text-gray-50">No data found</p>
+      </div>
+    </ng-template>
   </div>
 </div>
