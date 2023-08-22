@@ -21,8 +21,12 @@
         tabindex="0"
         class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
       >
-        <li><a (click)="onSelect('recipe')">Recipe</a></li>
-        <li><a (click)="onSelect('shopping-list')">Shopping list</a></li>
+        <li><a routerLink="/recipes" routerLinkActive="active">Recipe</a></li>
+        <li>
+          <a routerLink="/shopping-list" routerLinkActive="active"
+            >Shopping list</a
+          >
+        </li>
         <li>
           <a>Mange</a>
           <ul class="p-2">
@@ -32,12 +36,18 @@
         </li>
       </ul>
     </div>
-    <a class="btn btn-ghost normal-case text-xl">Recipe Book</a>
+    <a class="ml-5 recipe-book text-[25px] text-teal-600" routerLink="/"
+      >Recipe Book</a
+    >
   </div>
   <div class="navbar-center hidden md:flex">
     <ul class="menu menu-horizontal px-1">
-      <li><a href="#" (click)="onSelect('recipe')">Recipies</a></li>
-      <li><a (click)="onSelect('shopping-list')">Shopping List</a></li>
+      <li><a routerLink="/recipes" routerLinkActive="active">Recipies</a></li>
+      <li>
+        <a routerLink="/shopping-list" routerLinkActive="active"
+          >Shopping List</a
+        >
+      </li>
     </ul>
   </div>
   <div class="navbar-end hidden md:flex md:mr-10">

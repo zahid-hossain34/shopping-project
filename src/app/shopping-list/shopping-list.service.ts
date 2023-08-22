@@ -26,7 +26,20 @@ export class ShoppingListService {
     this.ingredientChanged.emit(this.ingredient.slice());
   }
   addIngredients(ingredients: Ingredient[]) {
-    this.ingredient.push(...ingredients);
+    console.log('addIngredients', ingredients);
+    // check those ingredients are already in the list
+    // if yes, then push the amount to the existing ingredient
+    // if no, then push the ingredient to the list
+    ingredients.forEach((ingredient) => {
+      const index = this.ingredient.findIndex(
+        (item) => item.name.toLowerCase() === ingredient.name.toLowerCase()
+      );
+      if (index !== -1) {
+        this.ingredient[index].amount += ingredient.amount;
+      } else {
+        this.ingredient.push(ingredient);
+      }
+    });
     this.ingredientChanged.emit(this.ingredient.slice());
   }
 }

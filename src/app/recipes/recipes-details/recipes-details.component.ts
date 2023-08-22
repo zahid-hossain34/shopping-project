@@ -14,8 +14,6 @@ export class RecipesDetailsComponent implements OnChanges {
   }
   constructor(private recipeService: RecipeService) {}
   onAddShoppingList() {
-    console.log('onAddShoppingList');
-
     this.recipeService.addIngredientsToShoppingList(
       this.recipeDetails.ingredients
     );

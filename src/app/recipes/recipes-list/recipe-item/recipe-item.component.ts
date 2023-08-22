@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Recipe } from '../../recipe.model';
 import { RecipeService } from '../../recipe.service';
 
@@ -7,7 +7,7 @@ import { RecipeService } from '../../recipe.service';
   templateUrl: './recipe-item.component.html',
   styleUrls: ['./recipe-item.component.scss'],
 })
-export class RecipeItemComponent implements OnInit {
+export class RecipeItemComponent implements OnInit, OnDestroy {
   constructor(private recipeService: RecipeService) {}
   recipes: Recipe[] = [];
   ngOnInit(): void {
@@ -21,5 +21,10 @@ export class RecipeItemComponent implements OnInit {
     }
     this.recipes[i].isSelected = !recipe.isSelected;
     this.recipeService.recipeSelected.emit(recipe);
+  }
+  ngOnDestroy(): void {
+    this.recipes.forEach((recipe) => {
+      recipe.isSelected = false;
+    });
   }
 }
