@@ -3,18 +3,6 @@
     <app-recipes-list></app-recipes-list>
   </div>
   <div class="">
-    <app-recipes-details
-      *ngIf="selectedRecipeDetails; else noRecipeSelected"
-      [recipeDetails]="selectedRecipeDetails"
-    ></app-recipes-details>
-    <ng-template #noRecipeSelected>
-      <div class="flex justify-center items-center md:mt-[70px]">
-        <div
-          class="alert min-w-[100px] bg-orange-200 flex justify-center items-center"
-        >
-          <span>Please Select a recipe !</span>
-        </div>
-      </div>
-    </ng-template>
+    <router-outlet></router-outlet>
   </div>
 </div>

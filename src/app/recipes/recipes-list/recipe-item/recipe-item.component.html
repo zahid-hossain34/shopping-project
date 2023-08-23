@@ -1,9 +1,9 @@
-<div
-  *ngFor="let recipe of recipes; let i = index"
+<a
+  *ngFor="let recipe of recipes"
   href="#"
   class="flex justify-between border border-1 border-gray-200 shadow-sm p-2 rounded-md mb-2"
-  [ngStyle]="{ 'background-color': recipe.isSelected ? '#ccfbf1' : '' }"
-  (click)="onSelect(recipe, i)"
+  routerLink="/recipes/{{ recipe.id }}"
+  routerLinkActive="bg-gray-200"
 >
   <div class="">
     <h4 class="">{{ recipe.name }}</h4>
@@ -17,4 +17,4 @@
       style="max-height: 50px"
     />
   </span>
-</div>
+</a>

@@ -35,6 +35,9 @@ export class RecipeService {
   getRecipes() {
     return this.recipes.slice();
   }
+  getRecipeById(id: number) {
+    return this.recipes.find((recipe: Recipe) => recipe.id === id);
+  }
 
   addIngredientsToShoppingList(ingredients: Ingredient[] | any) {
     console.log('addIngredientsToShoppingList', ingredients);
