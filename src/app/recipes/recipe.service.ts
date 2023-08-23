@@ -40,8 +40,6 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[] | any) {
-    console.log('addIngredientsToShoppingList', ingredients);
-
     this.shoppingListService.addIngredients(ingredients);
   }
 }

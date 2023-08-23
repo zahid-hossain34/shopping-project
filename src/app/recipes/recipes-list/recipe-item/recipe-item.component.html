@@ -1,9 +1,23 @@
+<div class="flex justify-between items-center">
+  <h1 class="text-xl mb-2 font-semibold text-gray-400">
+    Recipe List ({{ recipes.length }})
+  </h1>
+  <div class="mt-2 mb-2 flex justify-end">
+    <div class="">
+      <button class="btn btn-xs btn-outline capitalize" (click)="onRecipeAdd()">
+        Add Recipe
+      </button>
+    </div>
+  </div>
+</div>
+<hr />
+
 <a
   *ngFor="let recipe of recipes"
   href="#"
-  class="flex justify-between border border-1 border-gray-200 shadow-sm p-2 rounded-md mb-2"
+  class="flex mt-2 justify-between border border-1 border-gray-200 shadow-sm p-2 rounded-md mb-2"
   routerLink="/recipes/{{ recipe.id }}"
-  routerLinkActive="bg-gray-200"
+  routerLinkActive="bg-teal-100"
 >
   <div class="">
     <h4 class="">{{ recipe.name }}</h4>
