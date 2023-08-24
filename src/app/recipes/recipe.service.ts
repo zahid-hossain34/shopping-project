@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
@@ -8,6 +9,7 @@ import { Recipe } from './recipe.model';
 })
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
+  recipesChanged = new Subject<Recipe[]>();
 
   constructor(private shoppingListService: ShoppingListService) {}
   recipes: Recipe[] = [
@@ -41,5 +43,19 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredients: Ingredient[] | any) {
     this.shoppingListService.addIngredients(ingredients);
+  }
+  addrecipie(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+  updateRecipe(id: number, newRecipe: Recipe) {
+    const index = this.recipes.findIndex((recipe) => recipe.id === id);
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+  deleteRecipe(id: number) {
+    const index = this.recipes.findIndex((recipe) => recipe.id === id);
+    this.recipes.splice(index, 1);
+    this.recipesChanged.next(this.recipes.slice());
   }
 }

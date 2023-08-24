@@ -1,3 +1,141 @@
-<p>
-  create-recipe works!
-</p>
+<form
+  [formGroup]="createForm"
+  (ngSubmit)="onSubmite()"
+  class="mt-6 space-y-4 flex flex-col mb-6"
+>
+  <div class="flex space-x-4">
+    <button
+      class="btn btn-accent btn-sm"
+      type="submit"
+      [disabled]="!createForm.valid"
+    >
+      Save
+    </button>
+    <button
+      class="btn btn-error btn-sm"
+      type="button"
+      [disabled]="!createForm.valid"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+  </div>
+  <div>
+    <label class="label" for="name">Name</label>
+    <input
+      type="text"
+      id="name"
+      placeholder="Name"
+      required
+      formControlName="name"
+      class="input input-bordered input-sm input-accent w-full max-w-xs"
+    />
+    <p
+      class="text-rose-500"
+      *ngIf="createForm.get('name')?.invalid && createForm.get('name')?.touched"
+    >
+      Please inter valid name
+    </p>
+  </div>
+  <div>
+    <label class="label" for="imgUrl">Image URL</label>
+    <input
+      formControlName="imagePath"
+      placeholder="Image URL"
+      class="input input-bordered input-accent input-sm w-full max-w-xs"
+      type="text"
+      id="name"
+    />
+    <p
+      class="text-rose-500"
+      *ngIf="
+        createForm.get('imagePath')?.invalid &&
+        createForm.get('imagePath')?.touched
+      "
+    >
+      Please inter valid name
+    </p>
+  </div>
+  <div *ngIf="createForm.get('imagePath').value" class="w-[full] h-[200px]">
+    <img
+      class="w-full h-full rounded-md object-cover"
+      src="{{ createForm.get('imagePath').value }}"
+      alt=""
+    />
+  </div>
+  <div>
+    <label class="label" for="description">Description</label>
+    <textarea
+      class="textarea w-full textarea-accent"
+      placeholder="Description"
+      formControlName="description"
+      id="description"
+      required
+    ></textarea>
+    <p
+      class="text-rose-500"
+      *ngIf="
+        createForm.get('description')?.invalid &&
+        createForm.get('description')?.touched
+      "
+    >
+      Please inter valid description
+    </p>
+  </div>
+  <div
+    class="flex justify-between border space-x-2 border-gray-200 rounded-sm p-2"
+    formArrayName="ingredients"
+    *ngFor="
+      let item of createForm.controls['ingredients'].controls;
+      let i = index
+    "
+  >
+    <div class="flex space-x-2 items-center" [formGroupName]="i">
+      <input
+        placeholder="Name"
+        class="input input-sm input-bordered input-accent w-full max-w-xs"
+        type="text"
+        formControlName="name"
+      />
+      <!-- <p
+        class="text-rose-500"
+        *ngIf="
+          createForm.get('name')?.invalid && createForm.get('name')?.touched
+        "
+      >
+        Please inter valid name
+      </p> -->
+      <input
+        placeholder="Amount"
+        formControlName="amount"
+        class="input input-sm input-bordered input-accent w-full max-w-xs"
+        type="text"
+      />
+      <!-- <p
+        class="text-rose-500"
+        *ngIf="
+          createForm.get('amount')?.invalid && createForm.get('amount')?.touched
+        "
+      >
+        Please inter valid amount
+      </p> -->
+    </div>
+    <button
+      class="btn btn-error btn-sm"
+      type="button"
+      (click)="onDeleteIngrident(i)"
+    >
+      Delete
+    </button>
+  </div>
+  <hr />
+  <div>
+    <button
+      class="btn btn-success btn-xs"
+      type="button"
+      (click)="onAddIngredient()"
+    >
+      Add Ingredient
+    </button>
+  </div>
+</form>

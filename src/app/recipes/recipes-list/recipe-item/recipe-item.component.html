@@ -14,21 +14,19 @@
 
 <a
   *ngFor="let recipe of recipes"
-  href="#"
   class="flex mt-2 justify-between border border-1 border-gray-200 shadow-sm p-2 rounded-md mb-2"
   routerLink="/recipes/{{ recipe.id }}"
   routerLinkActive="bg-teal-100"
 >
-  <div class="">
-    <h4 class="">{{ recipe.name }}</h4>
-    <p class="">{{ recipe.description }}</p>
+  <div class="flex flex-col w-[400px]">
+    <h4 class="  ">{{ recipe.name }}</h4>
+    <p class="break-words">{{ recipe.description }}</p>
   </div>
-  <span class="">
+  <div class="w-[80px] h-[50px]">
     <img
       src="{{ recipe.imagePath }}"
       alt="{{ recipe.name }}"
-      class="rounded-md"
-      style="max-height: 50px"
+      class="rounded-md object-cover w-full h-full"
     />
-  </span>
+  </div>
 </a>
