@@ -20,4 +20,8 @@
     background-color: #0a977d;
     color: white;
   }
+.input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
   

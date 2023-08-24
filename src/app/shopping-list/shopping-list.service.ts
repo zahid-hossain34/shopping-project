@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
 
@@ -7,9 +8,10 @@ import { Ingredient } from '../shared/ingredient.model';
 })
 export class ShoppingListService {
   ingredientChanged = new Subject<Ingredient[]>();
+  startEditing = new Subject<number>();
   private ingredient: Ingredient[] = [
-    new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 10),
+    new Ingredient('Apples', 5, false),
+    new Ingredient('Tomatoes', 10, false),
   ];
   constructor() {
     console.log('ShoppingListService constructor', this.ingredient);
@@ -21,13 +23,15 @@ export class ShoppingListService {
   getIngredient() {
     return this.ingredient.slice();
   }
+  getIngredientsById(index: number) {
+    return this.ingredient[index];
+  }
   removeIngredient(item: Ingredient) {
     const index = this.ingredient.indexOf(item);
     this.ingredient.splice(index, 1);
     this.ingredientChanged.next(this.ingredient.slice());
   }
   addIngredients(ingredients: Ingredient[]) {
-    console.log('addIngredients', ingredients);
     // check those ingredients are already in the list
     // if yes, then push the amount to the existing ingredient
     // if no, then push the ingredient to the list
@@ -42,5 +46,16 @@ export class ShoppingListService {
       }
     });
     this.ingredientChanged.next(this.ingredient.slice());
+  }
+
+  updateIngredient(index: number, newIngredient: Ingredient) {
+    this.ingredient[index] = newIngredient;
+    this.ingredientChanged.next(this.ingredient.slice());
+  }
+  clearForm(form: NgForm) {
+    form.reset();
+    this.ingredient.forEach((item) => {
+      item.isDeleteable = false;
+    });
   }
 }

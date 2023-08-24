@@ -17,8 +17,8 @@ export class RecipeService {
       'This is a chiken stake recipe',
       'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg',
       [
-        { name: 'Chiken', amount: 1 },
-        { name: 'French Fries', amount: 20 },
+        { name: 'Chiken', amount: 1, isDeleteable: false },
+        { name: 'French Fries', amount: 20, isDeleteable: false },
       ]
     ),
     new Recipe(
@@ -27,8 +27,8 @@ export class RecipeService {
       'This is a BBQ stake recipe',
       'https://cdn.commercev3.net/cdn.jackstackbbq.com/images/popup/CYO-TKC.jpg',
       [
-        { name: 'Beef', amount: 1 },
-        { name: 'French Fries', amount: 20 },
+        { name: 'Beef', amount: 1, isDeleteable: false },
+        { name: 'French Fries', amount: 20, isDeleteable: false },
       ]
     ),
   ];

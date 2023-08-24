@@ -1,44 +1,68 @@
 <div class="">
   <div class="">
-    <div class="flex space-y-2 md:space-y-0 flex-col md:flex-row md:space-x-10">
-      <div class="flex flex-col space-y-2">
-        <label for="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          placeholder="Name"
-          class="input input-bordered input-accent w-full max-w-xs"
-          #nameInput
-        />
-      </div>
-      <div class="flex flex-col space-y-2">
-        <label for="amount">Amount</label>
-        <input
-          #amountInput
-          id="amount"
-          type="number"
-          placeholder="Amount"
-          class="input input-bordered input-accent w-full max-w-xs"
-        />
-      </div>
-    </div>
-    <div class="mt-5">
-      <div class="space-x-4">
-        <button
-          class="btn btn-success btn-sm"
-          type="button"
-          (click)="onAddItem()"
-        >
-          Add
-        </button>
-        <button
-          class="btn btn-primary btn-sm"
-          type="button"
-          (click)="onClearFields()"
-        >
-          Clear
-        </button>
-      </div>
+    <div class="flex space-y-4 flex-col">
+      <form action="" (ngSubmit)="onAddItem(f)" #f="ngForm">
+        <div class="flex flex-col space-y-2">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Name"
+            class="input input-bordered input-accent w-full max-w-xs"
+            name="name"
+            ngModel
+            required
+          />
+          <span
+            class="text-rose-300"
+            *ngIf="
+              f.form.controls['name']?.invalid &&
+              f.form.controls['name']?.touched
+            "
+            >Please Enter valid Name
+          </span>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label for="amount">Amount</label>
+          <input
+            ngModel
+            required
+            name="amount"
+            id="amount"
+            pattern="^[1-9]+[0-9]*$"
+            type="number"
+            placeholder="Amount"
+            class="input input-bordered input-accent w-full max-w-xs"
+          />
+          <span
+            class="text-rose-500"
+            *ngIf="
+              f.form.controls['amount']?.invalid &&
+              f.form.controls['amount']?.touched
+            "
+            >Please Enter valid Amount
+          </span>
+        </div>
+        <div class="mt-5">
+          <div class="space-x-4">
+            <button
+              class="btn btn-success btn-sm"
+              [disabled]="!f.valid"
+              type="submit"
+            >
+              <span>{{ !editeMode ? "Add" : "Update" }}</span>
+            </button>
+            <button
+              class="btn btn-primary btn-sm"
+              type="button"
+              [disabled]="!f.valid"
+              (click)="onClearFields(f)"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

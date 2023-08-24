@@ -7,16 +7,20 @@
       class="flex flex-col bg-sky-50 p-1 space-y-2 w-full"
     >
       <a
-        href="#"
-        class="border border-gray-100 p-2 bg-zinc-50 rounded-md shadow-md w0full"
+        class="border cursor-pointer hover:bg-teal-100 border-gray-100 p-2 bg-zinc-50 rounded-md shadow-md w-full"
         *ngFor="let item of ingredient; let i = index"
+        (click)="onEditItem(i)"
       >
         <div class="flex justify-between items-center">
           <div class="flex space-x-2">
             <p>{{ item?.name }}</p>
             <p>({{ item?.amount }})</p>
           </div>
-          <button class="btn btn-sm btn-error" (click)="delteItem(item)">
+          <button
+            [disabled]="item.isDeleteable"
+            class="btn btn-sm btn-error"
+            (click)="delteItem(item)"
+          >
             Delete
           </button>
         </div>
