@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Home/Home.component';
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuardService } from './guards/auth.guard.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CreateRecipeComponent } from './recipes/create-recipe/create-recipe.component';
 import { RecipePlaceholderComponent } from './recipes/recipe-placeholder/recipe-placeholder.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path: 'recipes',
     component: RecipesComponent,
+    canActivate: [AuthGuardService],
     children: [
       { path: '', component: RecipePlaceholderComponent },
       { path: 'create', component: CreateRecipeComponent },

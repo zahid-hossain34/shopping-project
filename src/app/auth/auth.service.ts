@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, catchError, tap, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../shared/user.model';
 
@@ -17,8 +18,11 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
-  user = new Subject<User>();
-  constructor(private http: HttpClient) {}
+  user = new BehaviorSubject<User>(null as any);
+  tokenExpirationTimer: any;
+
+  constructor(private http: HttpClient, private router: Router) {}
+
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
@@ -91,5 +95,40 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+  logOut() {
+    this.user.next(null as any);
+    this.router.navigate(['/auth']);
+    localStorage.removeItem('userData');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+  autoLogin() {
+    const userData = JSON.parse(localStorage.getItem('userData') as any);
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+      const expirationDuration = new Date(
+        userData._tokenExpirationDate
+      ).getTime();
+      const expirationTime = expirationDuration - new Date().getTime();
+      this.autoLogOut(expirationTime);
+    }
+  }
+  autoLogOut(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logOut();
+    }, expirationDuration);
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
+import { AuthInterceptorService } from './interceptors/auth.interceptor.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CreateRecipeComponent } from './recipes/create-recipe/create-recipe.component';
 import { RecipesDetailsComponent } from './recipes/recipes-details/recipes-details.component';
@@ -21,7 +22,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { SpinLoaderComponent } from './spin-loader/spin-loader.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     HeaderComponent,
     RecipesComponent,
@@ -36,8 +37,8 @@ import { SpinLoaderComponent } from './spin-loader/spin-loader.component';
     UpdateRecipeComponent,
     AuthComponent,
     SignUpComponent,
-      SpinLoaderComponent
-   ],
+    SpinLoaderComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,7 +46,13 @@ import { SpinLoaderComponent } from './spin-loader/spin-loader.component';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

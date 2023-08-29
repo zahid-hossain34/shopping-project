@@ -21,8 +21,10 @@
         tabindex="0"
         class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
       >
-        <li><a routerLink="/recipes" routerLinkActive="active">Recipe</a></li>
-        <li>
+        <li *ngIf="isAuthenticated">
+          <a routerLink="/recipes" routerLinkActive="active">Recipe</a>
+        </li>
+        <li *ngIf="!isAuthenticated">
           <a routerLink="/auth" routerLinkActive="active">Authentication</a>
         </li>
         <li>
@@ -30,7 +32,8 @@
             >Shopping list</a
           >
         </li>
-        <li>
+
+        <li *ngIf="isAuthenticated">
           <a>Mange</a>
           <ul class="p-2">
             <li>
@@ -41,6 +44,9 @@
             </li>
           </ul>
         </li>
+        <li *ngIf="isAuthenticated" (click)="onLogout()">
+          <a>Log out</a>
+        </li>
       </ul>
     </div>
     <a class="ml-5 recipe-book text-[25px] text-teal-600" routerLink="/"
@@ -49,8 +55,10 @@
   </div>
   <div class="navbar-center hidden md:flex">
     <ul class="menu menu-horizontal px-1">
-      <li><a routerLink="/recipes" routerLinkActive="active">Recipies</a></li>
-      <li>
+      <li *ngIf="isAuthenticated">
+        <a routerLink="/recipes" routerLinkActive="active">Recipies</a>
+      </li>
+      <li *ngIf="!isAuthenticated">
         <a routerLink="/auth" routerLinkActive="active">Authentication</a>
       </li>
       <li>
@@ -62,7 +70,7 @@
   </div>
   <div class="navbar-end hidden md:flex md:mr-10">
     <ul class="menu menu-horizontal px-1">
-      <li>
+      <li *ngIf="isAuthenticated">
         <details class="dropdown">
           <summary>Mange</summary>
           <ul class="p-1 bg-base-200 w-[120px]">
@@ -74,6 +82,9 @@
             </li>
           </ul>
         </details>
+      </li>
+      <li *ngIf="isAuthenticated" (click)="onLogout()">
+        <a>Log out</a>
       </li>
     </ul>
   </div>
