@@ -28,7 +28,7 @@ export class UpdateRecipeComponent implements OnInit, OnDestroy {
   }
   setInitialValue() {
     this.route.params.subscribe((params) => {
-      this.recipieupdateItem = this.recipeService.getRecipeById(+params['id']);
+      this.recipieupdateItem = this.recipeService.getRecipeById(params['id']);
       console.log(this.recipieupdateItem);
       this.updateForm.patchValue({
         name: this.recipieupdateItem.name,

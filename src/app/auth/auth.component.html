@@ -1,0 +1,82 @@
+<div class="card card-side bg-base-100 shadow-xl mt-10 border border-zinc-100">
+  <figure class="h-[full] w-[200px] md:w-[400px] md:h-[400px]">
+    <img
+      class="w-full h-full object-cover"
+      src="assets/images/recipe-cover-page.jpg"
+      alt="Album"
+    />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">{{ isLoaginMode ? "Log in" : "Sign Up" }}</h2>
+
+    <div class="toast toast-top toast-end" *ngIf="error">
+      <div class="alert alert-error">
+        <span>{{ error }}</span>
+      </div>
+    </div>
+    <div class="flex justify-center items-center">
+      <app-spin-loader *ngIf="isLoading"></app-spin-loader>
+    </div>
+    <form
+      action=""
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmite()"
+      *ngIf="!isLoading"
+    >
+      <div>
+        <label class="label" for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          required
+          formControlName="email"
+          class="input input-bordered input-sm input-accent w-full max-w-xs"
+        />
+        <p
+          class="text-rose-500"
+          *ngIf="
+            loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+          "
+        >
+          Please inter valid Email
+        </p>
+      </div>
+      <div>
+        <label class="label" for="name">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          [minlength]="6"
+          required
+          formControlName="password"
+          class="input input-bordered input-sm input-accent w-full max-w-xs"
+        />
+        <p
+          class="text-rose-500"
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+          "
+        >
+          Please inter valid password
+        </p>
+      </div>
+      <div
+        class="card-actions items-start justify-between mt-4 md:items-center"
+      >
+        <button
+          [disabled]="loginForm?.invalid"
+          class="btn btn-primary btn-sm"
+          type="submit"
+        >
+          {{ isLoaginMode ? "Log in" : "Sign Up" }}
+        </button>
+        <a (click)="swithMode()" class="cursor-pointer underline text-blue-500"
+          >Switch to {{ isLoaginMode ? "Sign Up" : "Login In" }}</a
+        >
+      </div>
+    </form>
+  </div>
+</div>

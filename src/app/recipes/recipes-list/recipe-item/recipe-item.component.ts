@@ -21,10 +21,10 @@ export class RecipeItemComponent implements OnInit, OnDestroy {
     );
     this.recipes = this.recipeService.getRecipes();
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
   onRecipeAdd() {
     this.route.navigate(['/recipes/create']);
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

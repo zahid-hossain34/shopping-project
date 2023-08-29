@@ -1,7 +1,7 @@
 import { Ingredient } from '../shared/ingredient.model';
 
 export class Recipe {
-  public id?: number;
+  public id?: string;
   public name: string;
   public description: string;
   public imagePath: string;
@@ -9,7 +9,7 @@ export class Recipe {
   public ingredients?: Ingredient[];
 
   constructor(
-    id: number,
+    id: string,
     name: string,
     desc: string,
     imgPath: string,

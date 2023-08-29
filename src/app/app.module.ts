@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -5,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './Home/Home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthComponent } from './auth/auth.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CreateRecipeComponent } from './recipes/create-recipe/create-recipe.component';
@@ -15,9 +18,10 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { UpdateRecipeComponent } from './recipes/update-recipe/update-recipe.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { SpinLoaderComponent } from './spin-loader/spin-loader.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     HeaderComponent,
     RecipesComponent,
@@ -30,8 +34,17 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
     NotFoundComponent,
     CreateRecipeComponent,
     UpdateRecipeComponent,
+    AuthComponent,
+    SignUpComponent,
+      SpinLoaderComponent
+   ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

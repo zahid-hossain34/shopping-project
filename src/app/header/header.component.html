@@ -1,7 +1,7 @@
 <div class="navbar bg-base-100 shadow-md">
   <div class="navbar-start">
     <div class="dropdown">
-      <label tabindex="0" class="btn btn-ghost lg:hidden">
+      <label tabindex="0" class="btn btn-ghost md:hidden">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5"
@@ -23,6 +23,9 @@
       >
         <li><a routerLink="/recipes" routerLinkActive="active">Recipe</a></li>
         <li>
+          <a routerLink="/auth" routerLinkActive="active">Authentication</a>
+        </li>
+        <li>
           <a routerLink="/shopping-list" routerLinkActive="active"
             >Shopping list</a
           >
@@ -30,8 +33,12 @@
         <li>
           <a>Mange</a>
           <ul class="p-2">
-            <li><a>Fetch Data</a></li>
-            <li><a>Save data</a></li>
+            <li>
+              <a (click)="onSaveData()" class="cursor-pointer">Save data</a>
+            </li>
+            <li>
+              <a class="cursor-pointer" (click)="onFetchData()">Fetch Data</a>
+            </li>
           </ul>
         </li>
       </ul>
@@ -44,6 +51,9 @@
     <ul class="menu menu-horizontal px-1">
       <li><a routerLink="/recipes" routerLinkActive="active">Recipies</a></li>
       <li>
+        <a routerLink="/auth" routerLinkActive="active">Authentication</a>
+      </li>
+      <li>
         <a routerLink="/shopping-list" routerLinkActive="active"
           >Shopping List</a
         >
@@ -53,11 +63,15 @@
   <div class="navbar-end hidden md:flex md:mr-10">
     <ul class="menu menu-horizontal px-1">
       <li>
-        <details class="">
+        <details class="dropdown">
           <summary>Mange</summary>
           <ul class="p-1 bg-base-200 w-[120px]">
-            <li><a>Save Data</a></li>
-            <li><a>Fetch Data</a></li>
+            <li>
+              <a (click)="onSaveData()" class="cursor-pointer">Save Data</a>
+            </li>
+            <li>
+              <a class="cursor-pointer" (click)="onFetchData()">Fetch Data</a>
+            </li>
           </ul>
         </details>
       </li>

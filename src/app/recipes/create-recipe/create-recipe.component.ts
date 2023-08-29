@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
@@ -37,7 +38,7 @@ export class CreateRecipeComponent implements OnInit {
   onSubmite() {
     if (this.createForm.valid) {
       const recipeFormValue: Recipe = {
-        id: 3,
+        id: uuidv4(),
         isSelected: false,
         ...this.createForm.value,
       };
